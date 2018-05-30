@@ -22,7 +22,7 @@ public class LicenseService {
     @Autowired
     public RestTemplate restTemplate;
 
-    @HystrixCommand
+    @HystrixCommand(fallbackMethod = "getOldOrgDetails")
     public String getOrgDetails(String orgId) {
         randomRunLong();
 
@@ -38,6 +38,10 @@ public class LicenseService {
             sleep();
         }
 
+    }
+
+    public String getOldOrgDetails(String orgId) {
+        return "OLD Data : " + orgId;
     }
 
     private void sleep() {

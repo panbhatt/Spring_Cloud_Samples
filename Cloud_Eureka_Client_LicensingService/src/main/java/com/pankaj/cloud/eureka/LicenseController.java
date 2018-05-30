@@ -35,6 +35,7 @@ public class LicenseController {
     }
     
     
+    
      @GetMapping(path = "/{orgId}/hysterix")
     public String getLicenseOfOrgWithHysterix(@PathVariable String orgId) {
 
