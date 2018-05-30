@@ -1,0 +1,11 @@
+spring:
+    application:
+        name: licensingservice
+    profiles:
+        active:
+            dev
+    cloud:
+        config:
+            url: http://localhost:8888
+            
+            
