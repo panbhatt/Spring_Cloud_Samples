@@ -6,6 +6,7 @@
 package com.pankaj.cloud.eureka;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,12 @@ public class LicenseService {
     @Autowired
     public RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "getOldOrgDetails")
+    @HystrixCommand(fallbackMethod = "getOldOrgDetails",
+            threadPoolKey = "getOrgDetailsByOrgId",
+            threadPoolProperties = {
+                @HystrixProperty(name = "coreSize", value = "30"),
+                @HystrixProperty(name = "maxQueueSize", value = "10")
+            })
     public String getOrgDetails(String orgId) {
         randomRunLong();
 
